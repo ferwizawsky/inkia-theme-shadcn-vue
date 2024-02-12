@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 // import { useOption } from "@/stores/option";
 // import { useAuth } from "@/stores/auth";
+import Dashboard from "@/routes/dashboard"; 
 import User from "@/routes/user"; 
 
 const routes: Array<RouteRecordRaw> = [
@@ -17,9 +18,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/dash",
     redirect: "/dash/user",
-    component: () => import("@/layouts/main.vue"),
+    component: () => import("@/layouts/Dash.vue"),
     children: [
       ...User, 
+      ...Dashboard
     ],
   },
 ];

@@ -1,4 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <RouterView />
+  <div class="min-h-screen bg-background/90">
+    <RouterView />
+  </div>
 </template>
