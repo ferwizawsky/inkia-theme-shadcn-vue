@@ -1,14 +1,31 @@
-<script setup lang="ts">
+<script setup>
 import apexchart from "vue3-apexcharts";
+import { onMounted, ref, watch } from "vue";
 
-let data_preventif = {
-  options: {
+const props = defineProps(["data"]);
+const options = ref();
+const series = ref([]);
+
+onMounted(() => {
+  options.value = getOption();
+  series.value = props?.data?.series ?? [];
+});
+watch(
+  () => props.data,
+  (e) => {
+    series.value = e?.series ?? [];
+    options.value = getOption();
+  }
+);
+
+function getOption() {
+  return {
     stroke: {
       show: false,
       width: 0,
     },
     chart: {
-      id: "satuan-atas",
+      id: "donutChart",
     },
     plotOptions: {
       pie: {
@@ -31,55 +48,26 @@ let data_preventif = {
     legend: {
       show: false,
     },
-    colors: [
-      "#FFCA57",
-      "#0194EC",
-      "#99FFA3",
-      "#FF89D7",
-      "#E6F634",
-      "#9885F9",
-      "#4DEFE4",
-      "#F46260",
-    ],
-    labels: [
-      "Aplikasi",
-      "Pemberian Obat",
-      "Olahraga Bersama",
-      "Penyemprotan Disinfektan",
-      "Riksa Suhu",
-      "Baksos & Bakkes",
-      "Rikkes",
-      "Pembagian APD (Masker/FaceShield/dll)",
-    ],
-  },
-  series: [1, 1, 1, 1, 1, 1, 1, 1],
-};
-let series: number[] = [44, 55, 41, 17, 15];
-let chartOptions: any = {
-  chart: {
-    type: "donut",
-  },
-  responsive: [
-    {
-      breakpoint: 480,
-      options: {
-        chart: {
-          width: 200,
-        },
-        legend: {
-          position: "bottom",
-        },
-      },
-    },
-  ],
-};
+    colors: props?.data?.colors,
+    labels: props?.data?.labels,
+  };
+}
 </script>
 <template>
-  <div id="chart">
-    <apexchart
-      type="donut"
-      :options="data_preventif.options"
-      :series="data_preventif.series"
-    ></apexchart>
+  <div class="p-4 border rounded-xl shadow-md">
+    <apexchart type="donut" :options="options" :series="series" />
+    <div class="text-sm pt-6">
+      <div v-for="(item, index) in data?.series" class="flex justify-between">
+        <div class="flex-none flex items-center">
+          <div
+            class="w-2 h-2 rounded-full mr-2"
+            v-if="props?.data?.colors[index]"
+            :style="{ backgroundColor: props?.data?.colors[index] }"
+          ></div>
+          {{ props?.data?.labels[index] }}
+        </div>
+        <div class="font-semibold">{{ item }}</div>
+      </div>
+    </div>
   </div>
 </template>

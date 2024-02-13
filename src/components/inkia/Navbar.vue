@@ -46,12 +46,8 @@ const list: MenuItem[] = [
     text: "Chart Collection",
   },
   {
-    to: "/dash/project",
-    text: "Project",
-  },
-  {
     to: "/dash/user",
-    text: "User",
+    text: "User Data",
   },
 ];
 
@@ -189,7 +185,7 @@ onMounted(() => {
       class="hover:text-foreground cursor-pointer pb-4"
       :class="
         route?.path?.toLowerCase().search(item.to) != -1
-          ? 'text-foreground  border-b-[3px] border-current'
+          ? 'text-foreground  border-b-[3px] border-current font-medium'
           : ''
       "
       v-for="(item, index) in list"
@@ -210,7 +206,7 @@ onMounted(() => {
 }
 
 .navbar {
-  @apply transition-all duration-500 sticky left-0 w-full overflow-x-auto break-normal flex bg-background z-30 top-0 text-sm pt-4 border-b border-foreground/30 text-foreground/40 space-x-4;
+  @apply sticky left-0 w-full overflow-x-auto break-normal flex bg-background z-30 top-0 text-sm pt-4 border-b border-foreground/30 text-foreground/40 space-x-4;
 }
 
 .navbar::-webkit-scrollbar-thumb {

@@ -7,7 +7,7 @@ const props = defineProps({
   type: String,
 });
 
-const colorLine = ref("#888");
+const colorLine = ref("#FFCA57");
 const series = ref(getSeries());
 const options = ref(getOption());
 
@@ -35,7 +35,7 @@ function getOption() {
       toolbar: {
         show: false,
       },
-      type: "area",
+      type: "line",
     },
     tooltip: {
       theme: "dark",
@@ -52,13 +52,6 @@ function getOption() {
     },
     fill: {
       colors: colorLine.value,
-      type: "gradient",
-      gradient: {
-        shadeIntensity: 1,
-        opacityFrom: 0.7,
-        opacityTo: 0.9,
-        stops: [0, 90, 100],
-      },
     },
     stroke: {
       show: true,
@@ -88,7 +81,7 @@ function getOption() {
 }
 </script>
 <template>
-  <div class="w-full h-[350px] pr-3 pl-1 py-3 bg-white rounded-xl">
+  <div class="w-full h-[350px] pr-3 pl-1 py-3 rounded-xl shadow-md border">
     <apexchart
       width="100%"
       height="100%"

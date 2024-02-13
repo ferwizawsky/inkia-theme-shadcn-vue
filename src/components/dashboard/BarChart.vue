@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import apexchart from "vue3-apexcharts";
 
 const chartOptions = {
